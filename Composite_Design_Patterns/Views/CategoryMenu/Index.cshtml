@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+    var menu = ViewBag.Menu as Composite;
+}
+<title>Composite Design Pattern</title>
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+<div class="container">
+    <h1>Composite Design Pattern</h1>
+    <br />
+    <br />
+    <div>
+        <form method="post">
+            <select name="categoryId" asp-items="ViewBag.selectList"> </select>
+            <input type="text" name="clothesName" />
+            <button class="btn btn-outline-success">Kaydet</button>
+        </form>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-header">
+                    Toplam Giyim(@menu.Count())
+                </div>
+                <div class="card-body">
+                    @foreach (var item in menu.Components)
+                    {
+                        @Html.Raw(item.Display())
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("ul").hide();
+        $(".menu").click(function (e) {
+            e.preventDefault();
+            $(this).parent().next().toggle();
+        })
+    })
+</script>
